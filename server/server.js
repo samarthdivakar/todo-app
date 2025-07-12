@@ -8,9 +8,33 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' 
-    ? [process.env.FRONTEND_URL, 'https://your-app.vercel.app']
-    : ['http://localhost:3000', 'http://localhost:5173'],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    
+    // Development origins
+    const devOrigins = ['http://localhost:3000', 'http://localhost:5173'];
+    
+    // Production origins
+    const prodOrigins = [
+      /^https:\/\/.*\.vercel\.app$/,  // Any Vercel app
+      /^https:\/\/.*\.netlify\.app$/,  // Any Netlify app
+    ];
+    
+    // Check if origin is allowed
+    if (devOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    
+    // Check production patterns
+    const isAllowed = prodOrigins.some(pattern => pattern.test(origin));
+    if (isAllowed) {
+      return callback(null, true);
+    }
+    
+    // If not allowed, reject
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
   optionsSuccessStatus: 200
 };

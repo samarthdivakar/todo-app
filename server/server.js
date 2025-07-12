@@ -11,15 +11,25 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://mongo:27017/todoapp', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+console.log('Attempting to connect to MongoDB Atlas...');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://mongo:27017/todoapp')
+  .then(() => {
+    console.log('✅ Connected to MongoDB Atlas successfully!');
+  })
+  .catch((error) => {
+    console.error('❌ MongoDB Atlas connection error:', error.message);
+    process.exit(1);
+  });
 
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
+db.on('error', (error) => {
+  console.error('❌ MongoDB connection error:', error);
+});
+db.on('disconnected', () => {
+  console.log('⚠️ MongoDB disconnected');
+});
+db.on('reconnected', () => {
+  console.log('✅ MongoDB reconnected');
 });
 
 // Todo Schema

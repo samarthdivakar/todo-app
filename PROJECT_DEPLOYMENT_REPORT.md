@@ -325,7 +325,7 @@ Start Command: Docker Run
 ```
 NODE_ENV=production
 PORT=5000
-MONGODB_URI=mongodb+srv://todouser:4DyN4gl4TG1UwO3g@todo-cluster.0fgbedh.mongodb.net/todoapp?retryWrites=true&w=majority&appName=todo-cluster
+MONGODB_URI=mongodb+srv://todouser:xxxxxxxxxxxxxxg@todo-cluster.0fgbedh.mongodb.net/todoapp?retryWrites=true&w=majority&appName=todo-cluster
 ```
 
 ### 4.4 CORS Configuration (Critical)

@@ -274,8 +274,8 @@ services:
 ### 3.2 User & Security Setup
 ```
 Username: todouser
-Password: 4DyN4gl4TG1UwO3g (auto-generated)
-Connection String: mongodb+srv://todouser:4DyN4gl4TG1UwO3g@todo-cluster.0fgbedh.mongodb.net/todoapp?retryWrites=true&w=majority&appName=todo-cluster
+Password: xxxxxxxxxxxxxxxxx (auto-generated)
+Connection String: mongodb+srv://todouser:xxxxxxxxxxxxxxxxx@todo-cluster.0fgbedh.mongodb.net/todoapp?retryWrites=true&w=majority&appName=todo-cluster
 ```
 
 ### 3.3 Network Security
